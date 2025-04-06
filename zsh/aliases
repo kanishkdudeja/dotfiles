@@ -1,0 +1,22 @@
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gco='git checkout '
+
+alias bat='batcat'
+alias apt-update='sudo apt update && sudo apt upgrade'
+alias popos-dock-transparent='gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.4'
+
+alias docker-start='sudo systemctl start docker'
+alias docker-stop='sudo systemctl stop docker'
+
+alias lzd='lazydocker'
+alias lzg='lazygit'
+
+alias bootwin='sudo efibootmgr -n 0 && sudo reboot'
+alias bootbios='sudo systemctl reboot --firmware-setup'
+
+alias docker-compose='docker compose'
+

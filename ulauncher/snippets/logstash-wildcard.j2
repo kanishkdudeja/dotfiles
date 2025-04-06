@@ -1,0 +1,15 @@
+---
+name: Wildcard Search for Logstash
+description: Wildcard Search for Logstash.
+---
+{
+  "bool": {
+    "must": {
+      "wildcard": {
+        "attr-name": {
+          "value": "*wildcard*"
+        }
+      }
+    }
+  }
+}

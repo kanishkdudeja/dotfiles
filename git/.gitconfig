@@ -1,0 +1,11 @@
+[includeIf "gitdir:~/dotfiles/"]
+  path = ~/.gitconfig-personal
+[includeIf "gitdir:~/kd/"]
+  path = ~/.gitconfig-personal
+[includeIf "gitdir:~/kd-backups/"]
+  path = ~/.gitconfig-personal
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
