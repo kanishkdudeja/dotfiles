@@ -20,3 +20,5 @@ alias bootbios='sudo systemctl reboot --firmware-setup'
 
 alias docker-compose='docker compose'
 
+alias py='python3'
+
