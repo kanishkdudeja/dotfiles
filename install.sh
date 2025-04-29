@@ -25,7 +25,5 @@ source ~/dotfiles/nerd-fonts/install.sh
   # for script in ~/dotfiles/apps/*.sh; do source $script; done
 # fi
 
-update-desktop-database ~/.local/share/applications
-
 echo "Both Oh My Posh and Starship prompts have been configured. Enable the one you would like to use in ~/.zshrc"
 echo "Configuration completed. Please restart your terminal."
