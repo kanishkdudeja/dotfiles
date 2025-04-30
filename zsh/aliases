@@ -15,7 +15,7 @@ alias docker-stop='sudo systemctl stop docker'
 alias lzd='lazydocker'
 alias lzg='lazygit'
 
-alias bootwin='sudo efibootmgr -n 0 && sudo reboot'
+alias bootwin='sudo efibootmgr -n 5 && sudo reboot'
 alias bootbios='sudo systemctl reboot --firmware-setup'
 
 alias docker-compose='docker compose'
