@@ -26,19 +26,9 @@
 
 - Enable the prompt of your choice in ~/.zshrc
   - Both Oh My Posh and Starship prompts are installed and configured by the install script.
-- Restart your terminal
+- Restart your terminal.
 
 #### Terminal Font and Color Scheme
 
 - Set your terminal app to use one of the Nerd fonts in your terminal settings.
-- Use an appropriate color scheme for your prompt
-
-#### Oh My Posh theme tweaks
-
-If you want to add a space after each prompt for Oh My Posh themes, add the following as the first block in the blocks array in your theme file (eg: ~/.oh-my-posh-themes/M365Princess.omp.json):
-
-```
-{
-    "type": "newline"
-}
-```
+- Use an appropriate color scheme for your prompt.
