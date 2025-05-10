@@ -2,3 +2,13 @@ if uname -r |grep -q 'microsoft' ; then
     eval `keychain --quiet --eval --agents ssh id_ed25519`
 fi
 
+# Define a function that prints a newline
+_add_newline_before_prompt() {
+  echo ""
+}
+
+# Check if the function is NOT already in the array of precmd functions
+if [[ -z "$precmd_functions[(r)_add_newline_before_prompt]" ]]; then
+  # If it's not found, add it to the precmd hook
+  add-zsh-hook precmd _add_newline_before_prompt
+fi
