@@ -6,7 +6,7 @@ alias gd='git diff'
 alias gco='git checkout '
 
 alias bat='batcat'
-alias apt-update='sudo apt update && sudo apt upgrade'
+alias apt-update='sudo apt update && sudo apt upgrade && sudo apt autoclean && sudo apt autoremove'
 alias popos-dock-transparent='gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.4'
 
 alias docker-start='sudo systemctl start docker'
