@@ -7,7 +7,7 @@ if [[ "$(uname -s)" == "Linux" ]]; then
   sudo apt update -y
 
   # Install useful applications and utilities
-  sudo apt install -y curl unzip gparted dnsutils bat vlc ripgrep eza zoxide plocate btop gpg
+  sudo apt install -y curl unzip gparted dnsutils bat vlc ripgrep zoxide plocate btop gpg
 
   # Install Eza (a modern replacement for ls)
   sudo mkdir -p /etc/apt/keyrings
