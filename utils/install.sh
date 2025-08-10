@@ -7,7 +7,10 @@ if [[ "$(uname -s)" == "Linux" ]]; then
   sudo apt update -y
 
   # Install useful applications and utilities
-  sudo apt install -y curl unzip gparted dnsutils bat vlc ripgrep zoxide plocate btop gpg
+  sudo apt install -y curl unzip gparted dnsutils bat vlc ripgrep zoxide plocate btop gpg fd-find
+
+  # Create symlink for fd
+  ln -s $(which fdfind) ~/.local/bin/fd
 
   # Install Eza (a modern replacement for ls)
   sudo mkdir -p /etc/apt/keyrings
@@ -21,7 +24,7 @@ fi
 # MacOS
 if [[ "$(uname -s)" == "Darwin" ]]; then
   echo "Installing MacOS packages via Brew"
-  brew install gh wget unison yt-dlp tldr tree speedtest-cli htop btop jq tmux neofetch bat eza jesseduffield/lazydocker/lazydocker jesseduffield/lazygit/lazygit
+  brew install gh wget unison yt-dlp tldr tree speedtest-cli htop btop jq tmux neofetch bat eza fd jesseduffield/lazydocker/lazydocker jesseduffield/lazygit/lazygit
   brew install autozimu/homebrew-formulas/unison-fsmonitor
 fi
 
