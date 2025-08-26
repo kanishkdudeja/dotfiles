@@ -4,7 +4,7 @@
   path = ~/.gitconfig-personal
 [includeIf "gitdir:~/kd-backups/"]
   path = ~/.gitconfig-personal
-[includeIf "gitdir:~/glomo/"]
+[includeIf "gitdir:~/supabase/"]
   path = ~/.gitconfig-work
 [filter "lfs"]
 	process = git-lfs filter-process
