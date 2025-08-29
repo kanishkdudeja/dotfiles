@@ -45,4 +45,6 @@ for PLUGIN in "${PLUGINS[@]}"; do
   fi
 done
 
+echo "ZSH_HIGHLIGHT_STYLES[unknown-token]='none'" >> ~/.zshrc
+
 echo "Oh My Zsh configuration completed."
