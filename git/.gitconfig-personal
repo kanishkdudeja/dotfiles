@@ -8,5 +8,6 @@
   st = status
   br = branch
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  pc = !git pull origin $(git rev-parse --abbrev-ref HEAD)
   type = cat-file -t
   dump = cat-file -p
