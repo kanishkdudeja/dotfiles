@@ -1,4 +1,4 @@
-font-size = 18
+font-size = 15
 keybind = shift+enter=text:\x1b\r
 
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
