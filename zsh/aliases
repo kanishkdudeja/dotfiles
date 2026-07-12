@@ -5,7 +5,9 @@ alias gc='git commit'
 alias gd='git diff'
 alias gco='git checkout '
 
-alias bat='batcat'
+if ! command -v bat >/dev/null 2>&1 && command -v batcat >/dev/null 2>&1; then
+  alias bat='batcat'
+fi
 alias apt-update='sudo apt update && sudo apt upgrade && sudo apt autoclean && sudo apt autoremove'
 alias popos-dock-transparent='gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.4'
 
@@ -21,4 +23,3 @@ alias bootbios='sudo systemctl reboot --firmware-setup'
 alias docker-compose='docker compose'
 
 alias py='python3'
-
