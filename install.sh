@@ -8,6 +8,7 @@ source ~/dotfiles/directories/install.sh
 
 source ~/dotfiles/git/install.sh
 source ~/dotfiles/ghostty/install.sh
+source ~/dotfiles/aerospace/install.sh
 source ~/dotfiles/tmux/install.sh
 source ~/dotfiles/vim/install.sh
 source ~/dotfiles/utils/install.sh
