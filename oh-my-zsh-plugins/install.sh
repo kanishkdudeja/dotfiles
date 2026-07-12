@@ -39,7 +39,11 @@ for PLUGIN in "${PLUGINS[@]}"; do
     echo "Enabling $PLUGIN plugin in .zshrc..."
 
     # Add plugins in order to the end of the plugins array in ~/.zshrc
-    sed -i "s/plugins=(\(.*\))/plugins=(\1 $PLUGIN)/" "$ZSHRC"
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+      sed -i '' "s/plugins=(\(.*\))/plugins=(\1 $PLUGIN)/" "$ZSHRC"
+    else
+      sed -i "s/plugins=(\(.*\))/plugins=(\1 $PLUGIN)/" "$ZSHRC"
+    fi
   else
     echo "$PLUGIN plugin is already enabled in .zshrc."
   fi

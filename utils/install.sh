@@ -24,7 +24,7 @@ fi
 # MacOS
 if [[ "$(uname -s)" == "Darwin" ]]; then
   echo "Installing MacOS packages via Brew"
-  brew install gh wget unison yt-dlp tldr tree speedtest-cli htop btop jq tmux fastfetch gnu-sed bat eza fd jesseduffield/lazydocker/lazydocker jesseduffield/lazygit/lazygit
+  brew install gh wget unison yt-dlp tldr tree speedtest-cli htop btop jq tmux fastfetch bat eza fd jesseduffield/lazydocker/lazydocker jesseduffield/lazygit/lazygit
   brew install autozimu/homebrew-formulas/unison-fsmonitor
 fi
 
