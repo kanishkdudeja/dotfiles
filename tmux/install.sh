@@ -15,7 +15,22 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# Install/update plugins declared in .tmux.conf
+# Themes are loaded by direct path in .tmux.conf (not via @plugin), so TPM
+# won't fetch them — clone them explicitly. Do this BEFORE install_plugins,
+# which sources the config (and would otherwise hit a missing theme path).
+# catppuccin/tmux and dracula/tmux share the basename "tmux", so they get
+# distinct target directories.
+if [ ! -d ~/.tmux/plugins/tmux ]; then
+  git clone https://github.com/catppuccin/tmux.git ~/.tmux/plugins/tmux
+fi
+if [ ! -d ~/.tmux/plugins/dracula ]; then
+  git clone https://github.com/dracula/tmux.git ~/.tmux/plugins/dracula
+fi
+if [ ! -d ~/.tmux/plugins/tokyo-night ]; then
+  git clone https://github.com/janoamaral/tokyo-night-tmux.git ~/.tmux/plugins/tokyo-night
+fi
+
+# Install/update plugins declared via @plugin in .tmux.conf (tpm, tmux-sensible)
 ~/.tmux/plugins/tpm/bin/install_plugins
 
 echo "TMUX configuration finished"

@@ -10,21 +10,15 @@ install_starship() {
     fi
 }
 
-# Function to configure Starship with the Pastel Powerline preset
+# Symlink the tracked Starship config (minimal Catppuccin Powerline).
 configure_starship() {
-    echo "Configuring Starship with the Pastel Powerline preset..."
+    echo "Symlinking Starship configuration..."
     mkdir -p ~/.config
-    starship_config=~/.config/starship.toml
-
-    if [ ! -f "$starship_config" ]; then
-		starship preset pastel-powerline -o ~/.config/starship.toml
-        echo "Starship configuration created."
-    else
-        echo "Starship configuration already exists."
-    fi
+    ln -sf ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 }
 
-# Function to update shell configuration
+# Add the init line to ~/.zshrc, commented, so you can enable Starship by
+# uncommenting it (same pick-your-prompt pattern as oh-my-posh).
 update_shell_config() {
 	if ! grep -q 'eval "$(starship init zsh)"' "$HOME/.zshrc"; then
 		echo "Updating Zsh configuration to initialize Starship..."
@@ -45,4 +39,4 @@ configure_starship
 # Update shell configuration
 update_shell_config
 
-echo "Starship prompt installed and configured with the Pastel Powerline preset successfully!"
+echo "Starship prompt installed and configuration symlinked successfully!"
