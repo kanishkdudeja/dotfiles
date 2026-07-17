@@ -50,7 +50,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["B", "C", "F", "I", "M", "N", "P", "S", "T", "W"]
+persistent-workspaces = ["B", "C", "F", "G", "I", "M", "N", "P", "S", "T", "W"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -147,7 +147,7 @@ gaps.outer.right =      2
     # alt-d = 'workspace D'
     # alt-e = 'workspace E'
     alt-f = 'workspace F' # Freeform
-    # alt-g = 'workspace G'
+    alt-g = 'workspace G' # Freeform 2
     alt-i = 'workspace I' # Issues (Linear)
     alt-m = 'workspace M' # Music (Spotify)
     alt-n = 'workspace N' # Notes (Obsidian)
@@ -180,7 +180,7 @@ gaps.outer.right =      2
     # alt-shift-d = 'move-node-to-workspace D'
     # alt-shift-e = 'move-node-to-workspace E'
     alt-shift-f = 'move-node-to-workspace F'
-    # alt-shift-g = 'move-node-to-workspace G'
+    alt-shift-g = 'move-node-to-workspace G'
     alt-shift-i = 'move-node-to-workspace I'
     alt-shift-m = 'move-node-to-workspace M'
     alt-shift-n = 'move-node-to-workspace N'
@@ -264,6 +264,7 @@ run = "move-node-to-workspace W"
 B = 'DELL' # Browser
 C = 'DELL' # Code (Cursor)
 F = 'DELL' # Freeform
+G = 'DELL' # Freeform 2
 I = 'DELL' # Issues (Linear) 
 M = 'LG' # Music (Spotify)
 N = 'DELL' # Notes (Obsidian)
