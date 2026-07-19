@@ -29,6 +29,12 @@ fi
 if [ ! -d ~/.tmux/plugins/tokyo-night ]; then
   git clone https://github.com/janoamaral/tokyo-night-tmux.git ~/.tmux/plugins/tokyo-night
 fi
+if [ ! -d ~/.tmux/plugins/rose-pine ]; then
+  git clone https://github.com/rose-pine/tmux.git ~/.tmux/plugins/rose-pine
+fi
+if [ ! -d ~/.tmux/plugins/nord ]; then
+  git clone https://github.com/nordtheme/tmux.git ~/.tmux/plugins/nord
+fi
 
 # Install/update plugins declared via @plugin in .tmux.conf (tpm, tmux-sensible)
 ~/.tmux/plugins/tpm/bin/install_plugins
