@@ -267,6 +267,31 @@ run = "move-node-to-workspace W"
 if.app-id = 'us.zoom.xos'
 run = "move-node-to-workspace Z"
 
+# floating windows
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.bitwarden.desktop'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
 # Dell as primary monitor, LG as secondary monitor
 [workspace-to-monitor-force-assignment]
 1 = 'DELL' # Freeform
