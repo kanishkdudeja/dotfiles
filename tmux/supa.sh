@@ -52,18 +52,19 @@ run "$win" 'npm i -g @openai/codex && codex'
 win=$(tmux new-window -t "$SESSION" -n "Claude" -c "$INFRA" -P -F '#{window_id}')
 run "$win" 'claude update && claude'
 
-# 4: Platform — pull current branch, then start the platform stack.
+# 4: Platform — pull current branch, then start the platform stack. The branch is
+#    named explicitly because a bare `git pull` fails on branches with no upstream.
 win=$(tmux new-window -t "$SESSION" -n "Platform" -c "$INFRA" -P -F '#{window_id}')
-run "$win" 'git pull && mise platform'
+run "$win" 'git pull origin "$(git branch --show-current)" && mise platform'
 
 # 5: Studio — pull the supabase monorepo's current branch, then start studio
 #    (window stays in the infrastructure directory).
 win=$(tmux new-window -t "$SESSION" -n "Studio" -c "$INFRA" -P -F '#{window_id}')
-run "$win" "git -C '$SUPABASE_REPO' pull && STUDIO_FRAMEWORK=tanstack mise studio:dev"
+run "$win" "git -C '$SUPABASE_REPO' pull origin \"\$(git -C '$SUPABASE_REPO' branch --show-current)\" && STUDIO_FRAMEWORK=tanstack mise studio:dev"
 
 # 6: Credits UI — pull only; server gets started manually when needed.
 win=$(tmux new-window -t "$SESSION" -n "Credits UI" -c "$CREDITS_UI" -P -F '#{window_id}')
-run "$win" 'git pull'
+run "$win" 'git pull origin "$(git branch --show-current)"'
 
 tmux select-window -t "$win_git"
 attach
