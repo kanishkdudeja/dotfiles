@@ -1,4 +1,16 @@
 font-size = 15
 keybind = shift+enter=text:\x1b\r
 
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+
+# Hyprland maps the physical Command-position key (Alt) to these Ctrl chords.
+# Ctrl+C remains unbound so it continues to interrupt terminal processes.
+keybind = control+v=paste_from_clipboard
+keybind = control+a=select_all
+keybind = control+f=start_search
+keybind = control+w=close_tab:this
+keybind = control+t=new_tab
+keybind = control+n=new_window
+
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
