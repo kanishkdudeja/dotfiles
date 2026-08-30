@@ -119,6 +119,32 @@ Option+2.
 Super+Shift+B is changed from the regular browser to a private browser, and
 Super+Shift+W is changed from Omawrite to WhatsApp.
 
+## Future Caps/Hyper automation ideas
+
+Caps currently emits `SUPER` and retains Omarchy's stock shortcuts. If it is
+later reclaimed as a dedicated Hyper layer, it could provide a mostly
+conflict-free namespace for personal scripts, launchers, and automations.
+These are inspiration only and are not active bindings:
+
+- Hyper+G — Google search prompt
+- Hyper+Shift+G — search selected or clipboard text
+- Hyper+Y — search YouTube
+- Hyper+M — choose and play a song or playlist
+- Hyper+R — play a specific radio station
+- Hyper+N — capture a quick note
+- Hyper+D — open a project chooser
+- Hyper+X — run a custom script
+- Hyper+U — open a frequently used URL
+- Hyper+O — OCR a screen region
+- Hyper+V — clipboard history
+- Hyper+A — run an AI command on selected text
+- Hyper+L — lock the computer
+
+One possible long-term division is to use Command for standard application
+shortcuts, Option for semantic workspace navigation, and Caps/Hyper for
+personal automation. The same physical shortcuts could be retained across
+Linux, macOS, and Windows while using platform-specific scripts underneath.
+
 ## Omarchy shell
 
 Omarchy 4 replaces Waybar with the Quickshell-based Omarchy shell. The tracked
