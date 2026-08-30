@@ -57,11 +57,10 @@ private key is not moved or deleted. The Razer component installs kernel
 headers, OpenRazer, and Polychromatic; it may invoke `sudo` to add the current
 user to the `openrazer` group.
 
-On a machine where Zsh is already installed, the root dispatcher is also
-available:
+The root dispatcher is also available:
 
 ```sh
-zsh install.sh omarchy --dry-run all
+bash install.sh omarchy --dry-run all
 ```
 
 Existing targets are copied to timestamped `.bak.<timestamp>.<pid>` files

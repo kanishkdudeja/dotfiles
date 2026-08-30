@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository manages cross-platform shell configuration for macOS and Debian-based Linux. The root `install.sh` orchestrates component installers. Each top-level directory owns one tool or concern: for example, `zsh/`, `git/`, `tmux/`, `vim/`, `ssh/`, and `ghostty/` contain configuration files plus an `install.sh` that installs packages or creates symlinks. `apps/` contains optional Linux application installers, while `ulauncher/snippets/` stores Jinja snippet templates.
+This repository has isolated `omarchy/` and `popos/` setups, macOS-only helpers under `macos/`, and a macOS-only `aerospace/` configuration. The root `install.sh` dispatches to the detected or explicitly selected platform. Under `popos/`, directories such as `zsh/`, `git/`, `tmux/`, `vim/`, `ssh/`, and `ghostty/` contain configuration files plus component installers. `popos/apps/` contains optional Debian application installers, while `popos/ulauncher/snippets/` stores Jinja snippet templates.
 
 Keep new configuration beside its installer. Add a new component to root `install.sh` only when it is safe to run as part of the standard setup.
 
@@ -10,16 +10,17 @@ Keep new configuration beside its installer. Add a new component to root `instal
 
 There is no compilation step or package-managed test suite. Use these commands from the repository root:
 
-- `bash zsh/install.sh` bootstraps Zsh and Oh My Zsh.
-- `zsh install.sh` runs the full dotfiles setup described in `README.md`.
-- `zsh -n install.sh */install.sh` checks Zsh-compatible scripts for syntax errors.
-- `bash -n zsh/install.sh apps/*.sh` checks scripts intended for Bash or simple POSIX-style execution.
+- `bash popos/zsh/install.sh` bootstraps Zsh and Oh My Zsh on Pop!_OS.
+- `bash install.sh omarchy --dry-run all` previews the Omarchy setup.
+- `zsh popos/install.sh` runs the full Pop!_OS setup described in `README.md`.
+- `zsh -n popos/install.sh popos/*/install.sh` checks Zsh-compatible scripts for syntax errors.
+- `bash -n install.sh popos/zsh/install.sh popos/apps/*.sh` checks scripts intended for Bash or simple POSIX-style execution.
 
 Full installers modify files under `$HOME`, install packages, and may invoke `sudo` or download content. Prefer syntax checks and targeted component runs during development.
 
 ## Coding Style & Naming Conventions
 
-Use two-space indentation in new shell code, preserve the existing style when editing older files, and quote variable expansions such as `"$HOME"` and `"$file"`. Start executable scripts with the appropriate shebang (`#!/bin/zsh` or `#!/bin/bash`). Name component entry points `install.sh`; name optional application scripts `apps/app-<name>.sh`. Keep platform branches explicit with `uname -s`, and make installers idempotent by checking before appending, cloning, or installing.
+Use two-space indentation in new shell code, preserve the existing style when editing older files, and quote variable expansions such as `"$HOME"` and `"$file"`. Start executable scripts with the appropriate shebang (`#!/bin/zsh` or `#!/bin/bash`). Name component entry points `install.sh`; name optional application scripts `popos/apps/app-<name>.sh`. Keep platform branches explicit with `uname -s`, and make installers idempotent by checking before appending, cloning, or installing.
 
 ## Testing Guidelines
 

@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+dotfiles_root="${DOTFILES_ROOT:-${0:A:h:h:h}}"
+
 if [[ "$(uname -s)" == "Linux" ]]; then
     echo "Installing Vim via apt"
 	sudo apt update -y
@@ -7,6 +9,6 @@ if [[ "$(uname -s)" == "Linux" ]]; then
 fi
 
 echo "Creating symlink for VIM configuration file"
-ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
+ln -sf "$dotfiles_root/popos/vim/.vimrc" ~/.vimrc
 
 echo "VIM configuration finished"

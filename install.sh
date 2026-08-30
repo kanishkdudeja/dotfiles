@@ -1,45 +1,60 @@
-#!/bin/zsh
+#!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+set -euo pipefail
 
-# Omarchy has its own package-free installer. Dispatch to it explicitly and
-# exit before any legacy Debian/Pop!_OS component can run.
-repo_root="${0:A:h}"
-if [[ "${1:-}" == "omarchy" ]]; then
-  shift
-  exec bash "$repo_root/omarchy/install.sh" "$@"
-fi
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# The legacy Linux installers below assume Apt and must never run on Omarchy.
-if command -v omarchy >/dev/null 2>&1; then
-  echo "Omarchy detected. Use: zsh install.sh omarchy [hypr|shell|ghostty|all]"
-  exit 1
-fi
+usage() {
+  cat <<'EOF'
+Usage: bash install.sh [omarchy|popos] [installer arguments]
 
-source ~/dotfiles/ssh/install.sh
-source ~/dotfiles/directories/install.sh
+With no platform argument, the installer detects Omarchy or Pop!_OS.
+EOF
+}
 
-source ~/dotfiles/git/install.sh
-source ~/dotfiles/ghostty/install.sh
-source ~/dotfiles/aerospace/install.sh
-source ~/dotfiles/tmux/install.sh
-source ~/dotfiles/vim/install.sh
-source ~/dotfiles/utils/install.sh
+is_popos() {
+  [[ -r /etc/os-release ]] && (
+    source /etc/os-release
+    [[ "${ID:-}" == "pop" ]]
+  )
+}
 
-source ~/dotfiles/oh-my-zsh-plugins/install.sh
-source ~/dotfiles/oh-my-posh/install.sh
-source ~/dotfiles/starship/install.sh
+case "${1:-}" in
+  omarchy|popos)
+    platform="$1"
+    shift
+    ;;
+  -h|--help|help)
+    usage
+    exit 0
+    ;;
+  "")
+    if command -v omarchy >/dev/null 2>&1 && [[ -d /usr/share/omarchy ]]; then
+      platform="omarchy"
+    elif is_popos; then
+      platform="popos"
+    else
+      echo "Unable to detect Omarchy or Pop!_OS." >&2
+      usage >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Unknown platform: $1" >&2
+    usage >&2
+    exit 2
+    ;;
+esac
 
-source ~/dotfiles/fzf/install.sh
-source ~/dotfiles/nerd-fonts/install.sh
-
-# Commented for now since app install scripts are not idempotent (i.e. apps will be reinstalled if script is run again)
-# Linux (Excludes WSL)
-# if [[ "$(uname -s)" == "Linux" && ! "$(uname -r | grep -q 'microsoft')" ]]; then
-  # Run installers
-  # for script in ~/dotfiles/apps/*.sh; do source $script; done
-# fi
-
-echo "Both Oh My Posh and Starship prompts have been configured. Enable the one you would like to use in ~/.zshrc"
-echo "Configuration completed. Please restart your terminal."
+case "$platform" in
+  omarchy)
+    exec bash "$repo_root/omarchy/install.sh" "$@"
+    ;;
+  popos)
+    if ! command -v zsh >/dev/null 2>&1; then
+      echo "Zsh is required. First run: bash popos/zsh/install.sh" >&2
+      exit 1
+    fi
+    exec zsh "$repo_root/popos/install.sh" "$@"
+    ;;
+esac

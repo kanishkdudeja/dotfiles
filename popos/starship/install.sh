@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+dotfiles_root="${DOTFILES_ROOT:-${0:A:h:h:h}}"
+
 # Function to install Starship
 install_starship() {
     if ! command -v starship &> /dev/null; then
@@ -14,7 +16,7 @@ install_starship() {
 configure_starship() {
     echo "Symlinking Starship configuration..."
     mkdir -p ~/.config
-    ln -sf ~/dotfiles/starship/starship.toml ~/.config/starship.toml
+    ln -sf "$dotfiles_root/popos/starship/starship.toml" ~/.config/starship.toml
 }
 
 # Add the init line to ~/.zshrc, commented, so you can enable Starship by

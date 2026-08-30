@@ -1,9 +1,22 @@
 #!/bin/bash
 
+if [[ ! -r /etc/os-release ]]; then
+  echo "Cannot identify this operating system; refusing the Pop!_OS Zsh install." >&2
+  exit 1
+fi
+
+source /etc/os-release
+if [[ "${ID:-}" != "pop" ]]; then
+  echo "This installer only supports Pop!_OS; detected ${PRETTY_NAME:-unknown}." >&2
+  exit 1
+fi
+
 # Function to check if a command exists
 command_exists() {
   command -v "$1" &> /dev/null
 }
+
+dotfiles_root="${DOTFILES_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 
 # Install Curl if it's not installed
 if ! command_exists curl; then
@@ -35,8 +48,8 @@ else
   echo "Oh My Zsh is already installed."
 fi
 
-ln -sf ~/dotfiles/zsh/aliases ~/.zsh_aliases
-ln -sf ~/dotfiles/zsh/config ~/.zsh_config
+ln -sf "$dotfiles_root/popos/zsh/aliases" ~/.zsh_aliases
+ln -sf "$dotfiles_root/popos/zsh/config" ~/.zsh_config
 
 # Check if the line already exists in ~/.zshrc
 if ! grep -qxF 'source ~/.zsh_aliases' ~/.zshrc; then

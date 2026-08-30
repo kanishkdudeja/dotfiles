@@ -10,7 +10,8 @@ if [[ "$(uname -s)" == "Linux" ]]; then
   sudo apt install -y curl unzip gparted dnsutils bat vlc ripgrep zoxide plocate btop fastfetch gpg fd-find
 
   # Create symlink for fd
-  ln -s $(which fdfind) ~/.local/bin/fd
+  mkdir -p "$HOME/.local/bin"
+  ln -sfn "$(command -v fdfind)" "$HOME/.local/bin/fd"
 
   # Install Eza (a modern replacement for ls)
   sudo mkdir -p /etc/apt/keyrings
