@@ -2,14 +2,8 @@
 
 dotfiles_root="${DOTFILES_ROOT:-${0:A:h:h:h}}"
 
-if [[ "$(uname -s)" == "Linux" ]]; then
-    echo "Installing Tmux via apt"
-    sudo apt update -y
-    sudo apt install -y tmux
-fi
-
 echo "Creating symlink for Tmux configuration file"
-ln -sf "$dotfiles_root/popos/tmux/.tmux.conf" ~/.tmux.conf
+ln -sf "$dotfiles_root/shared/tmux/.tmux.conf" ~/.tmux.conf
 
 # Install TPM (Tmux Plugin Manager)
 if [ ! -d ~/.tmux/plugins/tpm ]; then

@@ -49,7 +49,7 @@ else
 fi
 
 ln -sf "$dotfiles_root/popos/zsh/aliases" ~/.zsh_aliases
-ln -sf "$dotfiles_root/popos/zsh/config" ~/.zsh_config
+ln -sf "$dotfiles_root/shared/zsh/config" ~/.zsh_config
 
 # Check if the line already exists in ~/.zshrc
 if ! grep -qxF 'source ~/.zsh_aliases' ~/.zshrc; then

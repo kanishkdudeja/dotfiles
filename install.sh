@@ -6,9 +6,9 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
   cat <<'EOF'
-Usage: bash install.sh [omarchy|popos] [installer arguments]
+Usage: bash install.sh [omarchy|popos|macos] [installer arguments]
 
-With no platform argument, the installer detects Omarchy or Pop!_OS.
+With no platform argument, the installer detects Omarchy, Pop!_OS, or macOS.
 EOF
 }
 
@@ -20,7 +20,7 @@ is_popos() {
 }
 
 case "${1:-}" in
-  omarchy|popos)
+  omarchy|popos|macos)
     platform="$1"
     shift
     ;;
@@ -33,8 +33,10 @@ case "${1:-}" in
       platform="omarchy"
     elif is_popos; then
       platform="popos"
+    elif [[ "$(uname -s)" == "Darwin" ]]; then
+      platform="macos"
     else
-      echo "Unable to detect Omarchy or Pop!_OS." >&2
+      echo "Unable to detect Omarchy, Pop!_OS, or macOS." >&2
       usage >&2
       exit 1
     fi
@@ -56,5 +58,12 @@ case "$platform" in
       exit 1
     fi
     exec zsh "$repo_root/popos/install.sh" "$@"
+    ;;
+  macos)
+    if ! command -v zsh >/dev/null 2>&1; then
+      echo "Zsh is required on macOS." >&2
+      exit 1
+    fi
+    exec zsh "$repo_root/macos/install.sh" "$@"
     ;;
 esac

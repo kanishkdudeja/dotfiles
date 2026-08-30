@@ -2,10 +2,10 @@
 
 ## Platforms
 
-The repository has isolated installers for Omarchy 4 and Pop!_OS. The root
-installer detects either platform, or accepts the platform explicitly.
-macOS-only scripts and SSH configuration live under `macos/`, while the
-AeroSpace configuration remains separate at the repository root.
+The repository has isolated installers for Omarchy 4, Pop!_OS, and macOS. The
+root installer detects the platform or accepts it explicitly. Pop!_OS and
+macOS reuse platform-neutral components under `shared/`; Omarchy never runs
+those components.
 
 ## Installation
 
@@ -13,7 +13,7 @@ AeroSpace configuration remains separate at the repository root.
 
 - Clone this Git repository: `git clone git@github.com:kanishkdudeja/dotfiles.git`.
   - If SSH keys aren't set up, you can set up GitHub CLI and run `gh repo clone https://github.com/kanishkdudeja/dotfiles`.
-- From the repository root, run `bash install.sh` to detect Omarchy or Pop!_OS.
+- From the repository root, run `bash install.sh` to detect the platform.
 
 ### Omarchy 4
 
@@ -46,9 +46,21 @@ bash install.sh popos
 See the [Pop!_OS installer guide](popos/README.md). The Pop!_OS installer
 refuses to run on Omarchy, other Arch systems, or macOS.
 
+### macOS
+
+Install [Homebrew](https://brew.sh/) first, then run:
+
+```sh
+bash install.sh macos
+```
+
+The macOS installer configures Homebrew utilities, Zsh, Git, Ghostty,
+AeroSpace, tmux, Vim, prompts, fonts, and the tracked OrbStack/`UseKeychain`
+SSH configuration. See the [macOS installer guide](macos/README.md).
+
 ### Manual Steps
 
-#### Enable the prompt of your choice in Pop!_OS ZSH configuration
+#### Enable the prompt of your choice in Zsh configuration
 
 - Enable the prompt of your choice in ~/.zshrc
   - Both Oh My Posh and Starship prompts are installed and configured by the install script.

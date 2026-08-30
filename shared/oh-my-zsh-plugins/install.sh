@@ -5,10 +5,10 @@ command_exists() {
   command -v "$1" &> /dev/null
 }
 
-# Install Curl if it's not installed
+# Platform installers provide Git before this shared component runs.
 if ! command_exists git; then
-  echo "Git is not installed. Installing git..."
-  sudo apt update && sudo apt install -y git
+  echo "Git is required before installing Oh My Zsh plugins." >&2
+  return 1
 fi
 
 # Sourcing ~/.zshrc to be able to access the $ZSH_CUSTOM variable

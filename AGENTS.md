@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository has isolated `omarchy/` and `popos/` setups, macOS-only helpers under `macos/`, and a macOS-only `aerospace/` configuration. The root `install.sh` dispatches to the detected or explicitly selected platform. Under `popos/`, directories such as `zsh/`, `git/`, `tmux/`, `vim/`, `ssh/`, and `ghostty/` contain configuration files plus component installers. `popos/apps/` contains optional Debian application installers, while `popos/ulauncher/snippets/` stores Jinja snippet templates.
+This repository has isolated `omarchy/`, `popos/`, and `macos/` setups. The root `install.sh` dispatches to the detected or explicitly selected platform. `shared/` contains platform-neutral components sourced only by Pop!_OS and macOS; Omarchy never sources them. `popos/apps/` contains optional Debian application installers, while `popos/ulauncher/snippets/` stores Jinja snippet templates.
 
 Keep new configuration beside its installer. Add a new component to root `install.sh` only when it is safe to run as part of the standard setup.
 
@@ -13,7 +13,8 @@ There is no compilation step or package-managed test suite. Use these commands f
 - `bash popos/zsh/install.sh` bootstraps Zsh and Oh My Zsh on Pop!_OS.
 - `bash install.sh omarchy --dry-run all` previews the Omarchy setup.
 - `zsh popos/install.sh` runs the full Pop!_OS setup described in `README.md`.
-- `zsh -n popos/install.sh popos/*/install.sh` checks Zsh-compatible scripts for syntax errors.
+- `zsh macos/install.sh` runs the full macOS setup described in `README.md`.
+- `zsh -n popos/install.sh macos/install.sh popos/*/install.sh macos/*/install.sh shared/*/install.sh` checks Zsh-compatible scripts for syntax errors.
 - `bash -n install.sh popos/zsh/install.sh popos/apps/*.sh` checks scripts intended for Bash or simple POSIX-style execution.
 
 Full installers modify files under `$HOME`, install packages, and may invoke `sudo` or download content. Prefer syntax checks and targeted component runs during development.

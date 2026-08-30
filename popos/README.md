@@ -1,8 +1,9 @@
 # Pop!_OS configuration
 
-This directory contains the legacy Debian/Pop!_OS components. Its installer
+This directory contains Pop!_OS-specific Apt packages, aliases, applications,
+Linux Ghostty configuration, fonts, and SSH directory setup. Its installer
 checks `/etc/os-release` and refuses to run on Omarchy, other Arch systems, or
-macOS.
+macOS. Platform-neutral configuration is sourced from `shared/`.
 
 Install Zsh first on a fresh Pop!_OS machine:
 

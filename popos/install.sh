@@ -23,19 +23,19 @@ fi
 export DOTFILES_ROOT="$repo_root"
 
 source "$repo_root/popos/ssh/install.sh"
-source "$repo_root/popos/directories/install.sh"
+source "$repo_root/shared/directories/install.sh"
 
-source "$repo_root/popos/git/install.sh"
-source "$repo_root/popos/ghostty/install.sh"
-source "$repo_root/popos/tmux/install.sh"
-source "$repo_root/popos/vim/install.sh"
 source "$repo_root/popos/utils/install.sh"
+source "$repo_root/shared/git/install.sh"
+source "$repo_root/popos/ghostty/install.sh"
+source "$repo_root/shared/tmux/install.sh"
+source "$repo_root/shared/vim/install.sh"
 
-source "$repo_root/popos/oh-my-zsh-plugins/install.sh"
-source "$repo_root/popos/oh-my-posh/install.sh"
-source "$repo_root/popos/starship/install.sh"
+source "$repo_root/shared/oh-my-zsh-plugins/install.sh"
+source "$repo_root/shared/oh-my-posh/install.sh"
+source "$repo_root/shared/starship/install.sh"
 
-source "$repo_root/popos/fzf/install.sh"
+source "$repo_root/shared/fzf/install.sh"
 source "$repo_root/popos/nerd-fonts/install.sh"
 
 # Optional application scripts under popos/apps are intentionally not run by
