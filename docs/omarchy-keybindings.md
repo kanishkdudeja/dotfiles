@@ -44,6 +44,7 @@ application:
 | Command+Shift+S | Ctrl+Shift+S | Save as |
 | Command+F | Ctrl+F | Find |
 | Command+W | Ctrl+W | Close tab or document |
+| Command+Q | Ctrl+Q | Quit application where supported |
 | Command+T | Ctrl+T | New tab |
 | Command+N | Ctrl+N | New window |
 | Command+L | Ctrl+L | Address or location bar |
@@ -57,6 +58,10 @@ application:
 
 Command+Space opens Omarchy 4's main menu. Command+Return opens its apps menu.
 The full Lua definitions live in `omarchy/hypr/bindings.lua`.
+
+Command+Q follows the common Linux GUI convention of Ctrl+Q. Terminal programs
+do not generally interpret Ctrl+Q as quit, so Caps+W remains the reliable
+Omarchy shortcut for closing the active terminal window.
 
 Copy uses Ctrl+Insert so physical Ctrl+C remains available for terminal
 interrupts. The Ghostty overlay maps Ctrl+Insert to copy and maps the other
