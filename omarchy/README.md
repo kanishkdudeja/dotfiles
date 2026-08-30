@@ -48,10 +48,11 @@ bash omarchy/install.sh --dry-run razer
 bash omarchy/install.sh razer
 ```
 
-The apps component installs Chrome, Cursor, Dropbox, Ghostty, Codex, and
-Voxtype and restores the tracked Omarchy defaults. The Razer component installs
-kernel headers, OpenRazer, and Polychromatic; it may invoke `sudo` to add the
-current user to the `openrazer` group.
+The apps component installs Chrome, Cursor, Dropbox, 1Password and its CLI,
+Ghostty, Codex, and Voxtype, then restores the tracked Omarchy defaults.
+1Password sign-in and SSH Agent setup remain manual steps. The Razer component
+installs kernel headers, OpenRazer, and Polychromatic; it may invoke `sudo` to
+add the current user to the `openrazer` group.
 
 On a machine where Zsh is already installed, the root dispatcher is also
 available:

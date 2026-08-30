@@ -65,6 +65,17 @@ install_dropbox() {
   fi
 }
 
+install_1password() {
+  if omarchy pkg present 1password 1password-cli; then
+    echo "Unchanged: 1Password and its CLI are installed"
+  elif $dry_run; then
+    echo "Would run: omarchy install service 1password"
+    echo "1Password sign-in and SSH Agent setup would remain manual steps"
+  else
+    omarchy install service 1password
+  fi
+}
+
 install_ghostty() {
   if omarchy pkg present ghostty; then
     echo "Unchanged: Ghostty is installed"
@@ -143,6 +154,7 @@ ensure_default_agent() {
 install_chrome
 install_cursor
 install_dropbox
+install_1password
 install_ghostty
 install_codex
 
