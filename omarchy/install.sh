@@ -8,11 +8,11 @@ dry_run=false
 
 usage() {
   cat <<'EOF'
-Usage: omarchy/install.sh [--dry-run] [hypr|shell|ghostty|razer|all]
+Usage: omarchy/install.sh [--dry-run] [hypr|shell|ghostty|apps|razer|all]
 
 Installs only the Omarchy-specific configuration from this repository.
-The optional razer component installs hardware support packages; all other
-components remain configuration-only and never invoke the legacy Pop!_OS setup.
+The optional apps and razer components install packages; all other components
+remain configuration-only and never invoke the legacy Pop!_OS setup.
 EOF
 }
 
@@ -197,6 +197,14 @@ install_razer() {
   fi
 }
 
+install_apps() {
+  if $dry_run; then
+    "$repo_root/omarchy/apps/install.sh" --dry-run
+  else
+    "$repo_root/omarchy/apps/install.sh"
+  fi
+}
+
 case "$component" in
   hypr)
     install_hypr
@@ -206,6 +214,9 @@ case "$component" in
     ;;
   ghostty)
     install_ghostty
+    ;;
+  apps)
+    install_apps
     ;;
   razer)
     install_razer
