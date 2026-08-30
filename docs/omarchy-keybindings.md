@@ -76,7 +76,9 @@ navigation:
 | Option+Backspace | Ctrl+Backspace | Delete previous word |
 
 These bindings are repeatable, so holding an arrow or Backspace continues the
-operation.
+operation. Ghostty maps the translated Ctrl+Backspace chord directly to the
+Ctrl+W control byte used by Bash for deleting the previous word. This bypasses
+Ghostty's separate Ctrl+W binding for closing a tab.
 
 ## Semantic workspaces
 
