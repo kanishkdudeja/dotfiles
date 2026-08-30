@@ -23,8 +23,8 @@ hl.unbind("SUPER + SHIFT + W")
 o.bind("SUPER + SHIFT + W", "WhatsApp", { webapp = "https://web.whatsapp.com/" })
 
 -- Keep the old physical menu shortcuts, using Omarchy 4's native menus.
-o.bind("ALT + SPACE", "Apps menu", "omarchy-menu toggle apps")
-o.bind("ALT + RETURN", "Omarchy menu", "omarchy-menu toggle")
+o.bind("ALT + SPACE", "Omarchy menu", "omarchy-menu toggle root")
+o.bind("ALT + RETURN", "Apps menu", "omarchy-menu toggle apps")
 
 -- Semantic role workspaces (Caps Lock emits SUPER).
 -- These unbind Omarchy actions before assigning the workspace shortcuts.
