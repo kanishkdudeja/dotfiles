@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "kanishk.workspaces",
+  "name": "Semantic Workspaces",
+  "version": "1.0.0",
+  "author": "Kanishk",
+  "description": "Named semantic workspaces with single-monitor fallback",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Workspaces.qml"
+  },
+  "barWidget": {
+    "displayName": "Semantic Workspaces",
+    "description": "Named semantic workspaces with single-monitor fallback",
+    "category": "Compositor",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.workspaces"
+  }
+}

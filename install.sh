@@ -3,6 +3,20 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Omarchy has its own package-free installer. Dispatch to it explicitly and
+# exit before any legacy Debian/Pop!_OS component can run.
+repo_root="${0:A:h}"
+if [[ "${1:-}" == "omarchy" ]]; then
+  shift
+  exec bash "$repo_root/omarchy/install.sh" "$@"
+fi
+
+# The legacy Linux installers below assume Apt and must never run on Omarchy.
+if command -v omarchy >/dev/null 2>&1; then
+  echo "Omarchy detected. Use: zsh install.sh omarchy [hypr|shell|ghostty|all]"
+  exit 1
+fi
+
 source ~/dotfiles/ssh/install.sh
 source ~/dotfiles/directories/install.sh
 
