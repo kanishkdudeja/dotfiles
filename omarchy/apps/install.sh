@@ -70,7 +70,7 @@ install_1password() {
     echo "Unchanged: 1Password and its CLI are installed"
   elif $dry_run; then
     echo "Would run: omarchy install service 1password"
-    echo "1Password sign-in and SSH Agent setup would remain manual steps"
+    echo "1Password sign-in, key import, and enabling its SSH Agent would remain manual steps"
   else
     omarchy install service 1password
   fi

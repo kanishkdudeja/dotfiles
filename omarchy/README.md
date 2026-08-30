@@ -16,6 +16,7 @@ Razer components install packages only when explicitly selected.
 - `plugins/kanishk.workspaces/`: semantic workspace labels for one or two monitors.
 - `ghostty.conf`: font size and keybindings layered over Omarchy's Ghostty config.
 - `apps/install.sh`: optional personal applications installed through Omarchy.
+- `ssh/1password.conf`: OpenSSH connection to the 1Password SSH Agent.
 - `razer/install.sh`: optional OpenRazer and Polychromatic installation.
 
 The older `.conf`, `waybar/`, `hypridle`, and `hyprlock` files remain as an
@@ -49,10 +50,12 @@ bash omarchy/install.sh razer
 ```
 
 The apps component installs Chrome, Cursor, Dropbox, 1Password and its CLI,
-Ghostty, Codex, and Voxtype, then restores the tracked Omarchy defaults.
-1Password sign-in and SSH Agent setup remain manual steps. The Razer component
-installs kernel headers, OpenRazer, and Polychromatic; it may invoke `sudo` to
-add the current user to the `openrazer` group.
+Ghostty, Codex, and Voxtype, restores the tracked Omarchy defaults, and
+configures OpenSSH to use the 1Password SSH Agent. Signing in to 1Password,
+importing the key, and enabling its SSH Agent remain manual steps. The local
+private key is not moved or deleted. The Razer component installs kernel
+headers, OpenRazer, and Polychromatic; it may invoke `sudo` to add the current
+user to the `openrazer` group.
 
 On a machine where Zsh is already installed, the root dispatcher is also
 available:
@@ -64,6 +67,11 @@ zsh install.sh omarchy --dry-run all
 Existing targets are copied to timestamped `.bak.<timestamp>.<pid>` files
 before replacement. Configuration is copied rather than symlinked so Omarchy's
 own editors and bar commands can safely rewrite user-owned files.
+
+On a fresh machine, the apps component creates `~/.ssh/config` with an include
+for `~/.ssh/config.d/*.conf` and installs the tracked 1Password fragment there.
+On later runs it preserves the existing SSH config and does not duplicate the
+include.
 
 With both configured monitors connected, the workspace widget shows
 `1 2 B C N P S` on the Dell and `M T W` on the LG. With either monitor used

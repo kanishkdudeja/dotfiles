@@ -45,8 +45,12 @@ backup_target() {
 install_file() {
   local source="$1"
   local target="$2"
+  local mode="${3:-0644}"
 
   if [[ -f "$target" ]] && cmp -s -- "$source" "$target"; then
+    if ! $dry_run; then
+      chmod "$mode" "$target"
+    fi
     echo "Unchanged: $target"
     return
   fi
@@ -59,8 +63,55 @@ install_file() {
   mkdir -p -- "$(dirname "$target")"
   backup_target "$target"
   cp --remove-destination -- "$source" "$target"
-  chmod 0644 "$target"
+  chmod "$mode" "$target"
   echo "Installed: $target"
+}
+
+install_1password_ssh_config() {
+  local fragment_source="$repo_root/omarchy/ssh/1password.conf"
+  local fragment_target="$HOME/.ssh/config.d/1password.conf"
+  local config="$HOME/.ssh/config"
+  local include_line='Include ~/.ssh/config.d/*.conf'
+  local include_pattern='^[[:space:]]*Include[[:space:]]+~/.ssh/config\.d/\*\.conf[[:space:]]*$'
+
+  if [[ -L "$config" ]]; then
+    echo "Refusing to replace symlinked SSH config: $config" >&2
+    echo "Add this line to its real target, then re-run: $include_line" >&2
+    return 1
+  fi
+
+  if ! $dry_run; then
+    mkdir -p -- "$HOME/.ssh/config.d"
+    chmod 0700 "$HOME/.ssh" "$HOME/.ssh/config.d"
+  fi
+
+  install_file "$fragment_source" "$fragment_target" 0600
+
+  if [[ -f "$config" ]] && grep -Eq "$include_pattern" "$config"; then
+    if ! $dry_run; then
+      chmod 0600 "$config"
+    fi
+    echo "Unchanged: SSH config include"
+  elif $dry_run; then
+    if [[ -f "$config" ]]; then
+      echo "Would prepend the Omarchy SSH include to $config"
+    else
+      echo "Would create $config with the Omarchy SSH include"
+    fi
+  else
+    local temporary_config
+
+    backup_target "$config"
+    temporary_config="$(mktemp "$HOME/.ssh/config.tmp.XXXXXX")"
+    printf '%s\n' "$include_line" > "$temporary_config"
+    if [[ -s "$config" ]]; then
+      printf '\n' >> "$temporary_config"
+      cat -- "$config" >> "$temporary_config"
+    fi
+    chmod 0600 "$temporary_config"
+    mv -- "$temporary_config" "$config"
+    echo "Added the Omarchy SSH include to $config"
+  fi
 }
 
 validate_lua_sources() {
@@ -203,6 +254,8 @@ install_apps() {
   else
     "$repo_root/omarchy/apps/install.sh"
   fi
+
+  install_1password_ssh_config
 }
 
 case "$component" in
