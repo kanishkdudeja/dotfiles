@@ -26,35 +26,40 @@ o.bind("SUPER + SHIFT + W", "WhatsApp", { webapp = "https://web.whatsapp.com/" }
 o.bind("ALT + SPACE", "Omarchy menu", "omarchy-menu toggle root")
 o.bind("ALT + RETURN", "Apps menu", "omarchy-menu toggle apps")
 
--- Semantic role workspaces (Caps Lock emits SUPER).
--- These unbind Omarchy actions before assigning the workspace shortcuts.
-hl.unbind("SUPER + B")
-hl.unbind("SUPER + C") -- Universal copy
-hl.unbind("SUPER + M")
-hl.unbind("SUPER + N")
-hl.unbind("SUPER + P") -- Pseudo window
-hl.unbind("SUPER + S") -- Scratchpad
-hl.unbind("SUPER + T") -- Toggle floating/tiling
-hl.unbind("SUPER + W") -- Close window
+-- Semantic role workspaces. The physical Option key emits Hyper/MOD3, leaving
+-- Caps Lock/SUPER available for Omarchy's stock window-management shortcuts.
+local semantic_workspaces = {
+  { key = "B", name = "name:B", label = "Browser" },
+  { key = "C", name = "name:C", label = "Code" },
+  { key = "M", name = "name:M", label = "Music" },
+  { key = "N", name = "name:N", label = "Notes" },
+  { key = "P", name = "name:P", label = "Personal" },
+  { key = "S", name = "name:S", label = "Slack" },
+  { key = "T", name = "name:T", label = "Terminal" },
+  { key = "W", name = "name:W", label = "WhatsApp" },
+}
 
-o.bind("SUPER + B", "Browser workspace", hl.dsp.focus({ workspace = "name:B" }))
-o.bind("SUPER + C", "Cursor workspace", hl.dsp.focus({ workspace = "name:C" }))
-o.bind("SUPER + M", "Music workspace", hl.dsp.focus({ workspace = "name:M" }))
-o.bind("SUPER + N", "Notes workspace", hl.dsp.focus({ workspace = "name:N" }))
-o.bind("SUPER + P", "Personal workspace", hl.dsp.focus({ workspace = "name:P" }))
-o.bind("SUPER + S", "Slack workspace", hl.dsp.focus({ workspace = "name:S" }))
-o.bind("SUPER + T", "Terminal workspace", hl.dsp.focus({ workspace = "name:T" }))
-o.bind("SUPER + W", "WhatsApp workspace", hl.dsp.focus({ workspace = "name:W" }))
+for _, workspace in ipairs(semantic_workspaces) do
+  o.bind("MOD3 + " .. workspace.key, workspace.label .. " workspace", hl.dsp.focus({ workspace = workspace.name }))
+  o.bind(
+    "MOD3 + SHIFT + " .. workspace.key,
+    "Move window to " .. workspace.label .. " workspace",
+    hl.dsp.window.move({ workspace = workspace.name, follow = false })
+  )
+end
 
--- Preserve the window-management actions displaced above.
-o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
-o.bind("SUPER + SHIFT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
+for workspace = 1, 2 do
+  local key = "code:" .. tostring(workspace + 9)
+  local name = tostring(workspace)
+  o.bind("MOD3 + " .. key, "Freeform workspace " .. name, hl.dsp.focus({ workspace = name }))
+  o.bind(
+    "MOD3 + SHIFT + " .. key,
+    "Move window to freeform workspace " .. name,
+    hl.dsp.window.move({ workspace = name, follow = false })
+  )
+end
 
--- These replace Omarchy's Google Maps and Google Photos bindings.
-hl.unbind("SUPER + SHIFT + S")
-hl.unbind("SUPER + SHIFT + P")
-o.bind("SUPER + SHIFT + S", "Toggle scratchpad", hl.dsp.workspace.toggle_special("scratchpad"))
-o.bind("SUPER + SHIFT + P", "Pseudo window", hl.dsp.window.pseudo())
+o.bind("MOD3 + TAB", "Former workspace", hl.dsp.focus({ workspace = "previous" }))
 
 -- macOS-style application shortcuts. The physical Alt key beside Space acts
 -- as Command and sends the corresponding Ctrl shortcut to the focused app.

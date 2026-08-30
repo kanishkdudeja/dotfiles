@@ -7,9 +7,9 @@ targets Hyprland's Lua configuration and the Omarchy Quickshell desktop.
 
 | Physical key | Hyprland modifier | Purpose |
 | --- | --- | --- |
-| Caps Lock | `SUPER` | Omarchy shortcuts and semantic workspaces |
-| Windows key | `MOD3`/Hyper | macOS-style Option navigation |
-| Alt beside Space | `ALT` | macOS-style Command application shortcuts |
+| Caps Lock | `SUPER` | Stock Omarchy window, system, and numbered-workspace shortcuts |
+| Option (Windows/Super keycode) | `MOD3`/Hyper | Semantic workspaces and macOS-style Option navigation |
+| Command beside Space (Alt keycode) | `ALT` | macOS-style Command application shortcuts and menus |
 
 The mapping lives in `omarchy/hypr/input.lua`:
 
@@ -28,34 +28,35 @@ hl.config({
 
 ## Application shortcuts
 
-Hyprland consumes these Alt chords and sends Ctrl shortcuts to the focused
+Hyprland consumes these physical Command chords, represented by `ALT` in the
+configuration, and sends Ctrl shortcuts to the focused
 application:
 
 | Physical shortcut | Delivered shortcut | Intended action |
 | --- | --- | --- |
-| Alt+C | Ctrl+Insert | Copy |
-| Alt+V | Ctrl+V | Paste |
-| Alt+X | Ctrl+X | Cut |
-| Alt+A | Ctrl+A | Select all |
-| Alt+Z | Ctrl+Z | Undo |
-| Alt+Shift+Z | Ctrl+Shift+Z | Redo |
-| Alt+S | Ctrl+S | Save |
-| Alt+Shift+S | Ctrl+Shift+S | Save as |
-| Alt+F | Ctrl+F | Find |
-| Alt+W | Ctrl+W | Close tab or document |
-| Alt+T | Ctrl+T | New tab |
-| Alt+N | Ctrl+N | New window |
-| Alt+L | Ctrl+L | Address or location bar |
-| Alt+left-click | Ctrl+left-click | Open link in a new tab |
-| Alt+R | Ctrl+R | Reload |
-| Alt+Shift+T | Ctrl+Shift+T | Reopen closed tab |
-| Alt+P | Ctrl+P | Print |
-| Alt+0 | Ctrl+0 | Reset zoom |
-| Alt+- | Ctrl+- | Zoom out |
-| Alt+= | Ctrl+= | Zoom in |
+| Command+C | Ctrl+Insert | Copy |
+| Command+V | Ctrl+V | Paste |
+| Command+X | Ctrl+X | Cut |
+| Command+A | Ctrl+A | Select all |
+| Command+Z | Ctrl+Z | Undo |
+| Command+Shift+Z | Ctrl+Shift+Z | Redo |
+| Command+S | Ctrl+S | Save |
+| Command+Shift+S | Ctrl+Shift+S | Save as |
+| Command+F | Ctrl+F | Find |
+| Command+W | Ctrl+W | Close tab or document |
+| Command+T | Ctrl+T | New tab |
+| Command+N | Ctrl+N | New window |
+| Command+L | Ctrl+L | Address or location bar |
+| Command+left-click | Ctrl+left-click | Open link in a new tab |
+| Command+R | Ctrl+R | Reload |
+| Command+Shift+T | Ctrl+Shift+T | Reopen closed tab |
+| Command+P | Ctrl+P | Print |
+| Command+0 | Ctrl+0 | Reset zoom |
+| Command+- | Ctrl+- | Zoom out |
+| Command+= | Ctrl+= | Zoom in |
 
-Alt+Space opens Omarchy 4's native apps menu. Alt+Return opens the Omarchy
-menu. The full Lua definitions live in `omarchy/hypr/bindings.lua`.
+Command+Space opens Omarchy 4's main menu. Command+Return opens its apps menu.
+The full Lua definitions live in `omarchy/hypr/bindings.lua`.
 
 Copy uses Ctrl+Insert so physical Ctrl+C remains available for terminal
 interrupts. The Ghostty overlay maps Ctrl+Insert to copy and maps the other
@@ -63,15 +64,16 @@ translated Ctrl shortcuts to Ghostty actions.
 
 ## Word navigation
 
-The Windows key emits Hyper/MOD3 and acts like the macOS Option key:
+The physical Option key emits Hyper/MOD3 and retains macOS-style word
+navigation:
 
 | Physical shortcut | Delivered shortcut | Action |
 | --- | --- | --- |
-| Windows+Left | Ctrl+Left | Previous word |
-| Windows+Right | Ctrl+Right | Next word |
-| Windows+Shift+Left | Ctrl+Shift+Left | Select previous word |
-| Windows+Shift+Right | Ctrl+Shift+Right | Select next word |
-| Windows+Backspace | Ctrl+Backspace | Delete previous word |
+| Option+Left | Ctrl+Left | Previous word |
+| Option+Right | Ctrl+Right | Next word |
+| Option+Shift+Left | Ctrl+Shift+Left | Select previous word |
+| Option+Shift+Right | Ctrl+Shift+Right | Select next word |
+| Option+Backspace | Ctrl+Backspace | Delete previous word |
 
 These bindings are repeatable, so holding an arrow or Backspace continues the
 operation.
@@ -80,30 +82,32 @@ operation.
 
 | Physical shortcut | Workspace | Monitor | Routed application |
 | --- | --- | --- | --- |
-| Caps+1 | `1` Freeform | Dell | None |
-| Caps+2 | `2` Freeform | Dell | None |
-| Caps+B | `B` Browser | Dell | Google Chrome |
-| Caps+C | `C` Cursor | Dell | Cursor |
-| Caps+M | `M` Music | LG | Spotify |
-| Caps+N | `N` Notes | Dell | Obsidian |
-| Caps+P | `P` Personal | Dell | None |
-| Caps+S | `S` Slack | Dell | Slack |
-| Caps+T | `T` Terminal | LG | Ghostty |
-| Caps+W | `W` WhatsApp | LG | WhatsApp |
+| Option+1 | `1` Freeform | Dell | None |
+| Option+2 | `2` Freeform | Dell | None |
+| Option+B | `B` Browser | Dell | Google Chrome |
+| Option+C | `C` Code | Dell | Cursor |
+| Option+M | `M` Music | LG | Spotify |
+| Option+N | `N` Notes | Dell | Obsidian |
+| Option+P | `P` Personal | Dell | None |
+| Option+S | `S` Slack | Dell | Slack |
+| Option+T | `T` Terminal | LG | Ghostty |
+| Option+W | `W` WhatsApp | LG | WhatsApp |
+
+Option+Shift plus the same number or letter moves the active window silently
+to that workspace. Option+Tab returns to the previously focused workspace.
+This matches the physical AeroSpace workspace controls while leaving the
+AeroSpace configuration unchanged.
 
 The Dell is matched by `desc:Dell Inc. AW2725QF 51GD934`; the LG is matched by
 `desc:LG Electronics LG ULTRAGEAR 308NTLE7U344`. All workspaces remain visible
 when empty. New application windows move silently to their assigned workspace.
 
-The semantic shortcuts displace several Omarchy defaults:
-
-| Personal shortcut | Action | Replaced Omarchy binding |
-| --- | --- | --- |
-| Caps+Q | Close active window | Caps+W |
-| Caps+Shift+T | Toggle floating/tiling | Caps+T |
-| Caps+Shift+S | Toggle scratchpad | Google Maps |
-| Caps+Shift+P | Pseudo window | Google Photos |
-| Alt+C | Copy | Caps+C universal copy |
+Caps Lock remains `SUPER`, so Omarchy's stock shortcuts are still available.
+Examples include Caps+W to close a window, Caps+T to toggle floating/tiling,
+Caps+S for the scratchpad, Caps+P for pseudo mode, Caps+C for universal copy,
+and Caps+1 through Caps+0 for the stock numbered workspaces. The numbered
+workspace shortcuts are useful secondary aliases alongside Option+1 and
+Option+2.
 
 Super+Shift+B is changed from the regular browser to a private browser, and
 Super+Shift+W is changed from Omawrite to WhatsApp.

@@ -20,6 +20,20 @@
 - Log out and log back in again to use your new default shell.
 - Run `cd ~/dotfiles/ && zsh install.sh`
 
+### Omarchy 4
+
+Omarchy uses an isolated installer so the legacy Debian/Pop!_OS components are
+not run. Preview and install the configuration with:
+
+```sh
+bash omarchy/install.sh --dry-run all
+bash omarchy/install.sh all
+```
+
+See the [Omarchy installer guide](omarchy/README.md) and the
+[keyboard and workspace reference](docs/omarchy-keybindings.md) for component
+installs, modifier roles, and the complete semantic workspace layout.
+
 ### Manual Steps
 
 #### Enable the prompt of your choice in ZSH configuration
